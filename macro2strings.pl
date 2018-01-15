@@ -93,7 +93,7 @@ while_label:while (<$srcFileRef>)
 			$line =~ /\/\/ \#define(.*)0x/;
 			my $macro = trim($1);
 			print $destFileRef "\tcase " . $macro . " :\r\n";
-			print $destFileRef "\t\t_MACRO_2_STRINGS_" . $OS_DATE . "(" . $macro . ");\r\n";
+			print $destFileRef "\t\tp = (const char *)WM_MACRO_2_STRINGS" . "(" . $macro . ");\r\n";
 			print $destFileRef "\t\tbreak;\r\n";
 		}
 		else
