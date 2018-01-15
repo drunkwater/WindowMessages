@@ -1,14 +1,15 @@
-// #include <winapifamily.h>
+#include "stdafx.h"
 
-// /****************************************************************************
-// *                                                                           *
-// * winuser.h -- USER procedure declarations, constant definitions and macros *
-// *                                                                           *
-// * Copyright (c) Microsoft Corporation. All rights reserved.                 *
-// *                                                                           *
-// ****************************************************************************/
+/****************************************************************************
+*                                                                           *
+* winuser.h -- USER procedure declarations, constant definitions and macros *
+*                                                                           *
+* Copyright (c) Microsoft Corporation. All rights reserved.                 *
+*                                                                           *
+****************************************************************************/
 
 
+#define WM_MACRO_2_STRINGS(i) (#i)
 
 // #ifndef _WINUSER_
 // #define _WINUSER_
@@ -1947,7 +1948,9 @@
 	// /*
 	// * Window Messages
 	// */
-
+const char *GetWindowMessagesById(UINT msg){
+const char *p;
+switch(msg){
 	case WM_NULL :
 		p = (const char *)WM_MACRO_2_STRINGS(WM_NULL);
 		break;
@@ -2001,7 +2004,7 @@
 	case WM_CLOSE :
 		p = (const char *)WM_MACRO_2_STRINGS(WM_CLOSE);
 		break;
-// #ifndef _WIN32_WCE
+#ifndef _WIN32_WCE
 	case WM_QUERYENDSESSION :
 		p = (const char *)WM_MACRO_2_STRINGS(WM_QUERYENDSESSION);
 		break;
@@ -2011,7 +2014,7 @@
 	case WM_ENDSESSION :
 		p = (const char *)WM_MACRO_2_STRINGS(WM_ENDSESSION);
 		break;
-// #endif
+#endif
 	case WM_QUIT :
 		p = (const char *)WM_MACRO_2_STRINGS(WM_QUIT);
 		break;
@@ -2027,9 +2030,9 @@
 	case WM_WININICHANGE :
 		p = (const char *)WM_MACRO_2_STRINGS(WM_WININICHANGE);
 		break;
-// #if(WINVER >= 0x0400)
+#if(WINVER >= 0x0400)
 // #define WM_SETTINGCHANGE                WM_WININICHANGE
-// #endif /* WINVER >= 0x0400 */
+#endif /* WINVER >= 0x0400 */
 
 
 	case WM_DEVMODECHANGE :
@@ -2126,13 +2129,13 @@
 	case WM_COMPAREITEM :
 		p = (const char *)WM_MACRO_2_STRINGS(WM_COMPAREITEM);
 		break;
-// #if(WINVER >= 0x0500)
-// #ifndef _WIN32_WCE
+#if(WINVER >= 0x0500)
+#ifndef _WIN32_WCE
 	case WM_GETOBJECT :
 		p = (const char *)WM_MACRO_2_STRINGS(WM_GETOBJECT);
 		break;
-// #endif
-// #endif /* WINVER >= 0x0500 */
+#endif
+#endif /* WINVER >= 0x0500 */
 	case WM_COMPACTING :
 		p = (const char *)WM_MACRO_2_STRINGS(WM_COMPACTING);
 		break;
@@ -2191,7 +2194,7 @@
 // #pragma endregion
 
 
-// #if(WINVER >= 0x0400)
+#if(WINVER >= 0x0400)
 	case WM_NOTIFY :
 		p = (const char *)WM_MACRO_2_STRINGS(WM_NOTIFY);
 		break;
@@ -2237,7 +2240,7 @@
 	case WM_SETICON :
 		p = (const char *)WM_MACRO_2_STRINGS(WM_SETICON);
 		break;
-// #endif /* WINVER >= 0x0400 */
+#endif /* WINVER >= 0x0400 */
 
 	case WM_NCCREATE :
 		p = (const char *)WM_MACRO_2_STRINGS(WM_NCCREATE);
@@ -2260,11 +2263,11 @@
 	case WM_GETDLGCODE :
 		p = (const char *)WM_MACRO_2_STRINGS(WM_GETDLGCODE);
 		break;
-// #ifndef _WIN32_WCE
+#ifndef _WIN32_WCE
 	case WM_SYNCPAINT :
 		p = (const char *)WM_MACRO_2_STRINGS(WM_SYNCPAINT);
 		break;
-// #endif
+#endif
 	case WM_NCMOUSEMOVE :
 		p = (const char *)WM_MACRO_2_STRINGS(WM_NCMOUSEMOVE);
 		break;
@@ -2298,7 +2301,7 @@
 
 
 
-// #if(_WIN32_WINNT >= 0x0500)
+#if(_WIN32_WINNT >= 0x0500)
 	case WM_NCXBUTTONDOWN :
 		p = (const char *)WM_MACRO_2_STRINGS(WM_NCXBUTTONDOWN);
 		break;
@@ -2308,24 +2311,24 @@
 	case WM_NCXBUTTONDBLCLK :
 		p = (const char *)WM_MACRO_2_STRINGS(WM_NCXBUTTONDBLCLK);
 		break;
-// #endif /* _WIN32_WINNT >= 0x0500 */
+#endif /* _WIN32_WINNT >= 0x0500 */
 
 
-// #if(_WIN32_WINNT >= 0x0501)
+#if(_WIN32_WINNT >= 0x0501)
 	case WM_INPUT_DEVICE_CHANGE :
 		p = (const char *)WM_MACRO_2_STRINGS(WM_INPUT_DEVICE_CHANGE);
 		break;
-// #endif /* _WIN32_WINNT >= 0x0501 */
+#endif /* _WIN32_WINNT >= 0x0501 */
 
-// #if(_WIN32_WINNT >= 0x0501)
+#if(_WIN32_WINNT >= 0x0501)
 	case WM_INPUT :
 		p = (const char *)WM_MACRO_2_STRINGS(WM_INPUT);
 		break;
-// #endif /* _WIN32_WINNT >= 0x0501 */
+#endif /* _WIN32_WINNT >= 0x0501 */
 
-	case WM_KEYFIRST :
+	/*case WM_KEYFIRST :
 		p = (const char *)WM_MACRO_2_STRINGS(WM_KEYFIRST);
-		break;
+		break;*/
 	case WM_KEYDOWN :
 		p = (const char *)WM_MACRO_2_STRINGS(WM_KEYDOWN);
 		break;
@@ -2350,21 +2353,21 @@
 	case WM_SYSDEADCHAR :
 		p = (const char *)WM_MACRO_2_STRINGS(WM_SYSDEADCHAR);
 		break;
-// #if(_WIN32_WINNT >= 0x0501)
+#if(_WIN32_WINNT >= 0x0501)
 	case WM_UNICHAR :
 		p = (const char *)WM_MACRO_2_STRINGS(WM_UNICHAR);
 		break;
-	case WM_KEYLAST :
+	/*case WM_KEYLAST :
 		p = (const char *)WM_MACRO_2_STRINGS(WM_KEYLAST);
-		break;
+		break;*/
 // #define UNICODE_NOCHAR                  0xFFFF
-// #else
+#else
 	case WM_KEYLAST :
 		p = (const char *)WM_MACRO_2_STRINGS(WM_KEYLAST);
 		break;
-// #endif /* _WIN32_WINNT >= 0x0501 */
+#endif /* _WIN32_WINNT >= 0x0501 */
 
-// #if(WINVER >= 0x0400)
+#if(WINVER >= 0x0400)
 	case WM_IME_STARTCOMPOSITION :
 		p = (const char *)WM_MACRO_2_STRINGS(WM_IME_STARTCOMPOSITION);
 		break;
@@ -2374,10 +2377,10 @@
 	case WM_IME_COMPOSITION :
 		p = (const char *)WM_MACRO_2_STRINGS(WM_IME_COMPOSITION);
 		break;
-	case WM_IME_KEYLAST :
+	/*case WM_IME_KEYLAST :
 		p = (const char *)WM_MACRO_2_STRINGS(WM_IME_KEYLAST);
-		break;
-// #endif /* WINVER >= 0x0400 */
+		break;*/
+#endif /* WINVER >= 0x0400 */
 
 	case WM_INITDIALOG :
 		p = (const char *)WM_MACRO_2_STRINGS(WM_INITDIALOG);
@@ -2403,14 +2406,14 @@
 	case WM_INITMENUPOPUP :
 		p = (const char *)WM_MACRO_2_STRINGS(WM_INITMENUPOPUP);
 		break;
-// #if(WINVER >= 0x0601)
+#if(WINVER >= 0x0601)
 	case WM_GESTURE :
 		p = (const char *)WM_MACRO_2_STRINGS(WM_GESTURE);
 		break;
 	case WM_GESTURENOTIFY :
 		p = (const char *)WM_MACRO_2_STRINGS(WM_GESTURENOTIFY);
 		break;
-// #endif /* WINVER >= 0x0601 */
+#endif /* WINVER >= 0x0601 */
 	case WM_MENUSELECT :
 		p = (const char *)WM_MACRO_2_STRINGS(WM_MENUSELECT);
 		break;
@@ -2420,8 +2423,8 @@
 	case WM_ENTERIDLE :
 		p = (const char *)WM_MACRO_2_STRINGS(WM_ENTERIDLE);
 		break;
-// #if(WINVER >= 0x0500)
-// #ifndef _WIN32_WCE
+#if(WINVER >= 0x0500)
+#ifndef _WIN32_WCE
 	case WM_MENURBUTTONUP :
 		p = (const char *)WM_MACRO_2_STRINGS(WM_MENURBUTTONUP);
 		break;
@@ -2438,8 +2441,8 @@
 		p = (const char *)WM_MACRO_2_STRINGS(WM_MENUCOMMAND);
 		break;
 
-// #ifndef _WIN32_WCE
-// #if(_WIN32_WINNT >= 0x0500)
+#ifndef _WIN32_WCE
+#if(_WIN32_WINNT >= 0x0500)
 	case WM_CHANGEUISTATE :
 		p = (const char *)WM_MACRO_2_STRINGS(WM_CHANGEUISTATE);
 		break;
@@ -2465,11 +2468,11 @@
 // #if(_WIN32_WINNT >= 0x0501)
 // #define UISF_ACTIVE                     0x4
 // #endif /* _WIN32_WINNT >= 0x0501 */
-// #endif /* _WIN32_WINNT >= 0x0500 */
-// #endif
+#endif /* _WIN32_WINNT >= 0x0500 */
+#endif
 
-// #endif
-// #endif /* WINVER >= 0x0500 */
+#endif
+#endif /* WINVER >= 0x0500 */
 
 	case WM_CTLCOLORMSGBOX :
 		p = (const char *)WM_MACRO_2_STRINGS(WM_CTLCOLORMSGBOX);
@@ -2494,9 +2497,9 @@
 		break;
 // #define MN_GETHMENU                     0x01E1
 
-	case WM_MOUSEFIRST :
+	/*case WM_MOUSEFIRST :
 		p = (const char *)WM_MACRO_2_STRINGS(WM_MOUSEFIRST);
-		break;
+		break;*/
 	case WM_MOUSEMOVE :
 		p = (const char *)WM_MACRO_2_STRINGS(WM_MOUSEMOVE);
 		break;
@@ -2527,12 +2530,12 @@
 	case WM_MBUTTONDBLCLK :
 		p = (const char *)WM_MACRO_2_STRINGS(WM_MBUTTONDBLCLK);
 		break;
-// #if (_WIN32_WINNT >= 0x0400) || (_WIN32_WINDOWS > 0x0400)
+#if (_WIN32_WINNT >= 0x0400) || (_WIN32_WINDOWS > 0x0400)
 	case WM_MOUSEWHEEL :
 		p = (const char *)WM_MACRO_2_STRINGS(WM_MOUSEWHEEL);
 		break;
-// #endif
-// #if (_WIN32_WINNT >= 0x0500)
+#endif
+#if (_WIN32_WINNT >= 0x0500)
 	case WM_XBUTTONDOWN :
 		p = (const char *)WM_MACRO_2_STRINGS(WM_XBUTTONDOWN);
 		break;
@@ -2542,30 +2545,30 @@
 	case WM_XBUTTONDBLCLK :
 		p = (const char *)WM_MACRO_2_STRINGS(WM_XBUTTONDBLCLK);
 		break;
-// #endif
-// #if (_WIN32_WINNT >= 0x0600)
+#endif
+#if (_WIN32_WINNT >= 0x0600)
 	case WM_MOUSEHWHEEL :
 		p = (const char *)WM_MACRO_2_STRINGS(WM_MOUSEHWHEEL);
 		break;
-// #endif
+#endif
 
-// #if (_WIN32_WINNT >= 0x0600)
+#if (_WIN32_WINNT >= 0x0600)
+	/*case WM_MOUSELAST :
+		p = (const char *)WM_MACRO_2_STRINGS(WM_MOUSELAST);
+		break;*/
+#elif (_WIN32_WINNT >= 0x0500)
 	case WM_MOUSELAST :
 		p = (const char *)WM_MACRO_2_STRINGS(WM_MOUSELAST);
 		break;
-// #elif (_WIN32_WINNT >= 0x0500)
+#elif (_WIN32_WINNT >= 0x0400) || (_WIN32_WINDOWS > 0x0400)
 	case WM_MOUSELAST :
 		p = (const char *)WM_MACRO_2_STRINGS(WM_MOUSELAST);
 		break;
-// #elif (_WIN32_WINNT >= 0x0400) || (_WIN32_WINDOWS > 0x0400)
+#else
 	case WM_MOUSELAST :
 		p = (const char *)WM_MACRO_2_STRINGS(WM_MOUSELAST);
 		break;
-// #else
-	case WM_MOUSELAST :
-		p = (const char *)WM_MACRO_2_STRINGS(WM_MOUSELAST);
-		break;
-// #endif /* (_WIN32_WINNT >= 0x0600) */
+#endif /* (_WIN32_WINNT >= 0x0600) */
 
 
 // #if(_WIN32_WINNT >= 0x0400)
@@ -2598,7 +2601,7 @@
 		p = (const char *)WM_MACRO_2_STRINGS(WM_EXITMENULOOP);
 		break;
 
-// #if(WINVER >= 0x0400)
+#if(WINVER >= 0x0400)
 	case WM_NEXTMENU :
 		p = (const char *)WM_MACRO_2_STRINGS(WM_NEXTMENU);
 		break;
@@ -2613,7 +2616,7 @@
 		break;
 // #endif /* WINVER >= 0x0400 */
 
-// #if(WINVER >= 0x0400)
+#if(WINVER >= 0x0400)
 
 
 	case WM_POWERBROADCAST :
@@ -2663,15 +2666,15 @@
 // #endif // PBT_POWERSETTINGCHANGE
 
 // #endif // (_WIN32_WINNT >= 0x0502)
-// #endif
+#endif
 
-// #endif /* WINVER >= 0x0400 */
+#endif /* WINVER >= 0x0400 */
 
-// #if(WINVER >= 0x0400)
+#if(WINVER >= 0x0400)
 	case WM_DEVICECHANGE :
 		p = (const char *)WM_MACRO_2_STRINGS(WM_DEVICECHANGE);
 		break;
-// #endif /* WINVER >= 0x0400 */
+#endif /* WINVER >= 0x0400 */
 
 	case WM_MDICREATE :
 		p = (const char *)WM_MACRO_2_STRINGS(WM_MDICREATE);
@@ -2721,7 +2724,7 @@
 		p = (const char *)WM_MACRO_2_STRINGS(WM_MDIREFRESHMENU);
 		break;
 
-// #if(WINVER >= 0x0602)
+#if(WINVER >= 0x0602)
 	case WM_POINTERDEVICECHANGE :
 		p = (const char *)WM_MACRO_2_STRINGS(WM_POINTERDEVICECHANGE);
 		break;
@@ -2731,16 +2734,16 @@
 	case WM_POINTERDEVICEOUTOFRANGE :
 		p = (const char *)WM_MACRO_2_STRINGS(WM_POINTERDEVICEOUTOFRANGE);
 		break;
-// #endif /* WINVER >= 0x0602 */
+#endif /* WINVER >= 0x0602 */
 
 
-// #if(WINVER >= 0x0601)
+#if(WINVER >= 0x0601)
 	case WM_TOUCH :
 		p = (const char *)WM_MACRO_2_STRINGS(WM_TOUCH);
 		break;
-// #endif /* WINVER >= 0x0601 */
+#endif /* WINVER >= 0x0601 */
 
-// #if(WINVER >= 0x0602)
+#if(WINVER >= 0x0602)
 	case WM_NCPOINTERUPDATE :
 		p = (const char *)WM_MACRO_2_STRINGS(WM_NCPOINTERUPDATE);
 		break;
@@ -2790,10 +2793,10 @@
 	case WM_POINTERROUTEDRELEASED :
 		p = (const char *)WM_MACRO_2_STRINGS(WM_POINTERROUTEDRELEASED);
 		break;
-// #endif /* WINVER >= 0x0602 */
+#endif /* WINVER >= 0x0602 */
 
 
-// #if(WINVER >= 0x0400)
+#if(WINVER >= 0x0400)
 	case WM_IME_SETCONTEXT :
 		p = (const char *)WM_MACRO_2_STRINGS(WM_IME_SETCONTEXT);
 		break;
@@ -2812,39 +2815,39 @@
 	case WM_IME_CHAR :
 		p = (const char *)WM_MACRO_2_STRINGS(WM_IME_CHAR);
 		break;
-// #endif /* WINVER >= 0x0400 */
-// #if(WINVER >= 0x0500)
+#endif /* WINVER >= 0x0400 */
+#if(WINVER >= 0x0500)
 	case WM_IME_REQUEST :
 		p = (const char *)WM_MACRO_2_STRINGS(WM_IME_REQUEST);
 		break;
-// #endif /* WINVER >= 0x0500 */
-// #if(WINVER >= 0x0400)
+#endif /* WINVER >= 0x0500 */
+#if(WINVER >= 0x0400)
 	case WM_IME_KEYDOWN :
 		p = (const char *)WM_MACRO_2_STRINGS(WM_IME_KEYDOWN);
 		break;
 	case WM_IME_KEYUP :
 		p = (const char *)WM_MACRO_2_STRINGS(WM_IME_KEYUP);
 		break;
-// #endif /* WINVER >= 0x0400 */
+#endif /* WINVER >= 0x0400 */
 
-// #if((_WIN32_WINNT >= 0x0400) || (WINVER >= 0x0500))
+#if((_WIN32_WINNT >= 0x0400) || (WINVER >= 0x0500))
 	case WM_MOUSEHOVER :
 		p = (const char *)WM_MACRO_2_STRINGS(WM_MOUSEHOVER);
 		break;
 	case WM_MOUSELEAVE :
 		p = (const char *)WM_MACRO_2_STRINGS(WM_MOUSELEAVE);
 		break;
-// #endif
-// #if(WINVER >= 0x0500)
+#endif
+#if(WINVER >= 0x0500)
 	case WM_NCMOUSEHOVER :
 		p = (const char *)WM_MACRO_2_STRINGS(WM_NCMOUSEHOVER);
 		break;
 	case WM_NCMOUSELEAVE :
 		p = (const char *)WM_MACRO_2_STRINGS(WM_NCMOUSELEAVE);
 		break;
-// #endif /* WINVER >= 0x0500 */
+#endif /* WINVER >= 0x0500 */
 
-// #if(_WIN32_WINNT >= 0x0501)
+#if(_WIN32_WINNT >= 0x0501)
 	case WM_WTSSESSION_CHANGE :
 		p = (const char *)WM_MACRO_2_STRINGS(WM_WTSSESSION_CHANGE);
 		break;
@@ -2855,14 +2858,14 @@
 	case WM_TABLET_LAST :
 		p = (const char *)WM_MACRO_2_STRINGS(WM_TABLET_LAST);
 		break;
-// #endif /* _WIN32_WINNT >= 0x0501 */
+#endif /* _WIN32_WINNT >= 0x0501 */
 
-// #if(WINVER >= 0x0601)
+#if(WINVER >= 0x0601)
 	case WM_DPICHANGED :
 		p = (const char *)WM_MACRO_2_STRINGS(WM_DPICHANGED);
 		break;
-// #endif /* WINVER >= 0x0601 */
-// #if(WINVER >= 0x0605)
+#endif /* WINVER >= 0x0601 */
+#if(WINVER >= 0x0605)
 	case WM_DPICHANGED_BEFOREPARENT :
 		p = (const char *)WM_MACRO_2_STRINGS(WM_DPICHANGED_BEFOREPARENT);
 		break;
@@ -2872,7 +2875,7 @@
 	case WM_GETDPISCALEDSIZE :
 		p = (const char *)WM_MACRO_2_STRINGS(WM_GETDPISCALEDSIZE);
 		break;
-// #endif /* WINVER >= 0x0605 */
+#endif /* WINVER >= 0x0605 */
 
 
 	case WM_CUT :
@@ -2933,35 +2936,35 @@
 		p = (const char *)WM_MACRO_2_STRINGS(WM_HOTKEY);
 		break;
 
-// #if(WINVER >= 0x0400)
+#if(WINVER >= 0x0400)
 	case WM_PRINT :
 		p = (const char *)WM_MACRO_2_STRINGS(WM_PRINT);
 		break;
 	case WM_PRINTCLIENT :
 		p = (const char *)WM_MACRO_2_STRINGS(WM_PRINTCLIENT);
 		break;
-// #endif /* WINVER >= 0x0400 */
+#endif /* WINVER >= 0x0400 */
 
-// #if(_WIN32_WINNT >= 0x0500)
+#if(_WIN32_WINNT >= 0x0500)
 	case WM_APPCOMMAND :
 		p = (const char *)WM_MACRO_2_STRINGS(WM_APPCOMMAND);
 		break;
-// #endif /* _WIN32_WINNT >= 0x0500 */
+#endif /* _WIN32_WINNT >= 0x0500 */
 
-// #if(_WIN32_WINNT >= 0x0501)
+#if(_WIN32_WINNT >= 0x0501)
 	case WM_THEMECHANGED :
 		p = (const char *)WM_MACRO_2_STRINGS(WM_THEMECHANGED);
 		break;
-// #endif /* _WIN32_WINNT >= 0x0501 */
+#endif /* _WIN32_WINNT >= 0x0501 */
 
 
-// #if(_WIN32_WINNT >= 0x0501)
+#if(_WIN32_WINNT >= 0x0501)
 	case WM_CLIPBOARDUPDATE :
 		p = (const char *)WM_MACRO_2_STRINGS(WM_CLIPBOARDUPDATE);
 		break;
-// #endif /* _WIN32_WINNT >= 0x0501 */
+#endif /* _WIN32_WINNT >= 0x0501 */
 
-// #if(_WIN32_WINNT >= 0x0600)
+#if(_WIN32_WINNT >= 0x0600)
 	case WM_DWMCOMPOSITIONCHANGED :
 		p = (const char *)WM_MACRO_2_STRINGS(WM_DWMCOMPOSITIONCHANGED);
 		break;
@@ -2974,29 +2977,29 @@
 	case WM_DWMWINDOWMAXIMIZEDCHANGE :
 		p = (const char *)WM_MACRO_2_STRINGS(WM_DWMWINDOWMAXIMIZEDCHANGE);
 		break;
-// #endif /* _WIN32_WINNT >= 0x0600 */
+#endif /* _WIN32_WINNT >= 0x0600 */
 
-// #if(_WIN32_WINNT >= 0x0601)
+#if(_WIN32_WINNT >= 0x0601)
 	case WM_DWMSENDICONICTHUMBNAIL :
 		p = (const char *)WM_MACRO_2_STRINGS(WM_DWMSENDICONICTHUMBNAIL);
 		break;
 	case WM_DWMSENDICONICLIVEPREVIEWBITMAP :
 		p = (const char *)WM_MACRO_2_STRINGS(WM_DWMSENDICONICLIVEPREVIEWBITMAP);
 		break;
-// #endif /* _WIN32_WINNT >= 0x0601 */
+#endif /* _WIN32_WINNT >= 0x0601 */
 
 
-// #if(WINVER >= 0x0600)
+#if(WINVER >= 0x0600)
 	case WM_GETTITLEBARINFOEX :
 		p = (const char *)WM_MACRO_2_STRINGS(WM_GETTITLEBARINFOEX);
 		break;
-// #endif /* WINVER >= 0x0600 */
+#endif /* WINVER >= 0x0600 */
 
-// #if(WINVER >= 0x0400)
-// #endif /* WINVER >= 0x0400 */
+#if(WINVER >= 0x0400)
+#endif /* WINVER >= 0x0400 */
 
 
-// #if(WINVER >= 0x0400)
+#if(WINVER >= 0x0400)
 	case WM_HANDHELDFIRST :
 		p = (const char *)WM_MACRO_2_STRINGS(WM_HANDHELDFIRST);
 		break;
@@ -3010,7 +3013,7 @@
 	case WM_AFXLAST :
 		p = (const char *)WM_MACRO_2_STRINGS(WM_AFXLAST);
 		break;
-// #endif /* WINVER >= 0x0400 */
+#endif /* WINVER >= 0x0400 */
 
 	case WM_PENWINFIRST :
 		p = (const char *)WM_MACRO_2_STRINGS(WM_PENWINFIRST);
@@ -3020,11 +3023,11 @@
 		break;
 
 
-// #if(WINVER >= 0x0400)
+#if(WINVER >= 0x0400)
 	case WM_APP :
 		p = (const char *)WM_MACRO_2_STRINGS(WM_APP);
 		break;
-// #endif /* WINVER >= 0x0400 */
+#endif /* WINVER >= 0x0400 */
 
 
 	// /*
@@ -3035,7 +3038,12 @@
 	case WM_USER :
 		p = (const char *)WM_MACRO_2_STRINGS(WM_USER);
 		break;
-
+	default :
+		p = (const char *)("Unknown");
+		break;
+	}
+	return p;
+}
 // #if(WINVER >= 0x0400)
 
 	// /*  wParam for WM_SIZING message  */
